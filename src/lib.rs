@@ -36,50 +36,50 @@ mod tests {
 
     #[test]
     fn it_works() {
-        let mut t = IncrementalAverage::new();
+        let mut ia = IncrementalAverage::new();
 
-        assert!(t.get().is_none());
+        assert!(ia.get().is_none());
 
-        t.add(1.0);
-        t.get();
+        ia.add(1.0);
+        ia.get();
 
-        assert!(t.get().is_some());
-        assert_eq!(t.get().unwrap(), 1.0);
+        assert!(ia.get().is_some());
+        assert_eq!(ia.get().unwrap(), 1.0);
 
-        t.add(1.0);
-        t.get();
+        ia.add(1.0);
+        ia.get();
 
-        assert!(t.get().is_some());
-        assert_eq!(t.get().unwrap(), 1.0);
+        assert!(ia.get().is_some());
+        assert_eq!(ia.get().unwrap(), 1.0);
 
-        t.add(4.0);
-        t.get();
+        ia.add(4.0);
+        ia.get();
 
-        assert!(t.get().is_some());
-        assert_eq!(t.get().unwrap(), 2.0);
+        assert!(ia.get().is_some());
+        assert_eq!(ia.get().unwrap(), 2.0);
 
-        t.add(0.0);
-        t.get();
+        ia.add(0.0);
+        ia.get();
 
-        assert!(t.get().is_some());
-        assert_eq!(t.get().unwrap(), 1.5);
+        assert!(ia.get().is_some());
+        assert_eq!(ia.get().unwrap(), 1.5);
 
-        t.remove(0.0);
-        t.get();
+        ia.remove(0.0);
+        ia.get();
 
-        assert!(t.get().is_some());
-        assert_eq!(t.get().unwrap(), 2.0);
+        assert!(ia.get().is_some());
+        assert_eq!(ia.get().unwrap(), 2.0);
 
-        t.remove(4.0);
-        t.get();
+        ia.remove(4.0);
+        ia.get();
 
-        assert!(t.get().is_some());
-        assert_eq!(t.get().unwrap(), 1.0);
+        assert!(ia.get().is_some());
+        assert_eq!(ia.get().unwrap(), 1.0);
 
-        t.remove(1.0);
-        t.get();
+        ia.remove(1.0);
+        ia.get();
 
-        assert!(t.get().is_some());
-        assert_eq!(t.get().unwrap(), 1.0);
+        assert!(ia.get().is_some());
+        assert_eq!(ia.get().unwrap(), 1.0);
     }
 }
