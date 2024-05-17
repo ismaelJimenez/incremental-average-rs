@@ -2,6 +2,8 @@
 
 Support for incremental averaging, allowing to add and subtract numbers in an average as you go.
 
+[![Continuous integration](https://github.com/ismaelJimenez/incremental-average-rs/actions/workflows/rust.yml/badge.svg)](https://github.com/ismaelJimenez/incremental-average-rs/actions/workflows/rust.yml)
+
 ## Usage
 
 To use `incremental-average`, add this to your `Cargo.toml`:
