@@ -1,5 +1,28 @@
-pub fn add(left: usize, right: usize) -> usize {
-    left + right
+struct IncrementalAverage {
+    size: u32,
+    average: f64,
+}
+
+impl IncrementalAverage {
+    fn new() -> Self {
+        Self {
+            size: 0,
+            average: 0.0,
+        }
+    }
+
+    fn add(&mut self, value: f64) {
+        self.size += 1;
+        self.average += (value - self.average) / f64::from(self.size);
+    }
+
+    fn get(&self) -> Option<f64> {
+        if self.size > 0 {
+            Some(self.average)
+        } else {
+            None
+        }
+    }
 }
 
 #[cfg(test)]
@@ -8,7 +31,32 @@ mod tests {
 
     #[test]
     fn it_works() {
-        let result = add(2, 2);
-        assert_eq!(result, 4);
+        let mut t = IncrementalAverage::new();
+
+        assert!(t.get().is_none());
+
+        t.add(1.0);
+        t.get();
+
+        assert!(t.get().is_some());
+        assert_eq!(t.get().unwrap(), 1.0);
+
+        t.add(1.0);
+        t.get();
+
+        assert!(t.get().is_some());
+        assert_eq!(t.get().unwrap(), 1.0);
+
+        t.add(4.0);
+        t.get();
+
+        assert!(t.get().is_some());
+        assert_eq!(t.get().unwrap(), 2.0);
+
+        t.add(0.0);
+        t.get();
+
+        assert!(t.get().is_some());
+        assert_eq!(t.get().unwrap(), 1.5);
     }
 }
