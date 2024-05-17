@@ -16,6 +16,11 @@ impl IncrementalAverage {
         self.average += (value - self.average) / f64::from(self.size);
     }
 
+    fn remove(&mut self, value: f64) {
+        self.average = (f64::from(self.size) * self.average - value) / (f64::from(self.size - 1));
+        self.size -= 1;
+    }
+
     fn get(&self) -> Option<f64> {
         if self.size > 0 {
             Some(self.average)
@@ -58,5 +63,23 @@ mod tests {
 
         assert!(t.get().is_some());
         assert_eq!(t.get().unwrap(), 1.5);
+
+        t.remove(0.0);
+        t.get();
+
+        assert!(t.get().is_some());
+        assert_eq!(t.get().unwrap(), 2.0);
+
+        t.remove(4.0);
+        t.get();
+
+        assert!(t.get().is_some());
+        assert_eq!(t.get().unwrap(), 1.0);
+
+        t.remove(1.0);
+        t.get();
+
+        assert!(t.get().is_some());
+        assert_eq!(t.get().unwrap(), 1.0);
     }
 }
